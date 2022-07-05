@@ -1,9 +1,19 @@
+:root {
+  --dark-gray: #002333;
+  --dark-green: #0d4c38;
+  --light-gray: #cad5e2;
+  --light-green: #cff5ce;
+}
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.headroom {
+  background-color: var(--dark-green);
 }
 
 a {
