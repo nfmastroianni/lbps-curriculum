@@ -1,30 +1,42 @@
 import Head from "next/head";
+import Link from "next/link";
 import Layout from "../components/Layout";
 import styled from "@emotion/styled";
-import { createCurriculaObject } from "../utils";
+import { alphaSortArrayAscending, createCurriculaObject } from "../utils";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+} from "@chakra-ui/react";
+import Section from "../components/Section";
 
-const Section = styled.section`
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
-  h2 {
-    text-align: center;
-    margin: 0;
+const NavWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonLink = styled.a`
+  text-align: center;
+  border: 1px solid var(--dark-green);
+  margin-bottom: 0.5rem;
+  &:last-child {
+    margin-bottom: 0;
   }
-  p {
-    margin: 0.5rem 0;
-  }
-  @media (min-width: 640px) {
-    h2 {
-      margin: 0.5rem;
-    }
-    p {
-      margin: 1rem 0;
-    }
+  padding: 0.75rem 1.2rem;
+  background-color: var(--light-green);
+  color: var(--dark-gray);
+  border-radius: 3px;
+  min-width: 300px;
+  &:hover {
+    box-shadow: 0 0 2px 1px var(--dark-green);
   }
 `;
 
 export default function Home({ curricula }) {
+  const spans = [...new Set(curricula.map(({ span }) => span))];
   return (
     <>
       <Head>
@@ -33,7 +45,7 @@ export default function Home({ curricula }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Section>
+        <Section id="top">
           <h2>Introductory Heading</h2>
           <p>
             Introductory paragraph explaining how this site is organized. Lorem
@@ -44,8 +56,48 @@ export default function Home({ curricula }) {
           </p>
         </Section>
         <Section>
-          <h2>Select a Grade Span/Band</h2>
+          <h2>Jump to a Grade Span</h2>
+          <NavWrapper>
+            {spans.map((span) => {
+              return (
+                <Link key={span} href={`#${span}`} passHref>
+                  <ButtonLink>{span}</ButtonLink>
+                </Link>
+              );
+            })}
+          </NavWrapper>
         </Section>
+        {spans.map((span, i) => {
+          let areas = [...new Set(curricula.map(({ area }) => area))];
+          alphaSortArrayAscending(areas, "area");
+          return (
+            <Section key={span + i} id={span} headerText={span}>
+              {areas.map((area, j) => {
+                let areaCurricula = curricula.filter(
+                  (curriculum) =>
+                    curriculum.span === span &&
+                    curriculum.area === area &&
+                    curriculum.published === "TRUE"
+                );
+                alphaSortArrayAscending(areaCurricula, "title");
+                return (
+                  <div key={span + i + area + j}>
+                    <h3>{area}</h3>
+                    <Accordion>
+                      {areaCurricula.map((areaCurriculum) => {
+                        return (
+                          <AccordionItem key={areaCurriculum.title}>
+                            {areaCurriculum.title}
+                          </AccordionItem>
+                        );
+                      })}
+                    </Accordion>
+                  </div>
+                );
+              })}
+            </Section>
+          );
+        })}
       </Layout>
     </>
   );
@@ -56,8 +108,8 @@ export async function getStaticProps() {
   const res = await req.json();
   res.data.shift();
   const curricula = createCurriculaObject(res.data);
-  console.log("CURRICULA OBJECT = ", curricula);
+
   return {
-    props: { curricula: res.data },
+    props: { curricula: curricula },
   };
 }
