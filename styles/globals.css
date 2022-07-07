@@ -4,17 +4,21 @@
   --light-gray: #cad5e2;
   --light-green: #cff5ce;
 }
-@media (prefers-reduced-motion: no-prference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+  html,
+  body {
+    scroll-behavior: auto;
+  }
 }
 
 .headroom {
