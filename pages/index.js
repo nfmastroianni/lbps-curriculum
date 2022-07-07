@@ -10,8 +10,12 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
+  List,
+  ListItem,
+  ListIcon,
 } from "@chakra-ui/react";
 import Section from "../components/Section";
+import { FaFilePdf, FaRegCalendarAlt } from "react-icons/fa";
 
 const NavWrapper = styled.div`
   display: flex;
@@ -36,7 +40,12 @@ const ButtonLink = styled.a`
 `;
 
 export default function Home({ curricula }) {
-  const spans = [...new Set(curricula.map(({ span }) => span))];
+  // const spans = [...new Set(curricula.map(({ span }) => span))];
+  const allSpans = [];
+  curricula.forEach((curriculum) => {
+    curriculum.published === "TRUE" && allSpans.push(curriculum.span);
+  });
+  const spans = [...new Set(allSpans)];
   return (
     <>
       <Head>
@@ -68,8 +77,14 @@ export default function Home({ curricula }) {
           </NavWrapper>
         </Section>
         {spans.map((span, i) => {
-          let areas = [...new Set(curricula.map(({ area }) => area))];
-          alphaSortArrayAscending(areas, "area");
+          let areas = [];
+          curricula.forEach((curriculum) => {
+            if (curriculum.span == span && curriculum.published === "TRUE") {
+              areas.push(curriculum.area);
+            }
+          });
+          alphaSortArrayAscending(areas);
+
           return (
             <Section key={span + i} id={span} headerText={span}>
               {areas.map((area, j) => {
@@ -83,11 +98,42 @@ export default function Home({ curricula }) {
                 return (
                   <div key={span + i + area + j}>
                     <h3>{area}</h3>
-                    <Accordion>
+                    <Accordion allowToggle>
                       {areaCurricula.map((areaCurriculum) => {
                         return (
                           <AccordionItem key={areaCurriculum.title}>
-                            {areaCurriculum.title}
+                            <h4>
+                              <AccordionButton>
+                                <Box flex="1" textAlign="left">
+                                  {areaCurriculum.title}
+                                </Box>
+                                <AccordionIcon />
+                              </AccordionButton>
+                            </h4>
+                            <AccordionPanel pb={4}>
+                              <List spacing={3}>
+                                <ListItem>
+                                  <ListIcon as={FaFilePdf} />
+                                  <a
+                                    href={areaCurriculum.guide}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    Curriculum Guide
+                                  </a>
+                                </ListItem>
+                                <ListItem>
+                                  <ListIcon as={FaRegCalendarAlt} />
+                                  <a
+                                    href={areaCurriculum.calendar}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    Pacing Calendar
+                                  </a>
+                                </ListItem>
+                              </List>
+                            </AccordionPanel>
                           </AccordionItem>
                         );
                       })}
