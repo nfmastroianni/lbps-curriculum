@@ -4,6 +4,11 @@
   --light-gray: #cad5e2;
   --light-green: #cff5ce;
 }
+@media (prefers-reduced-motion: no-prference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
 html,
 body {
   padding: 0;
