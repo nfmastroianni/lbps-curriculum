@@ -14,5 +14,9 @@ export const createCurriculaObject = (array) => {
 };
 
 export const alphaSortArrayAscending = (array, prop) => {
-  return array.sort((a, b) => (a[prop] > b[prop] ? 1 : -1));
+  if (prop) {
+    return array.sort((a, b) => (a[prop] > b[prop] ? 1 : -1));
+  } else {
+    return array.sort((a, b) => (a > b ? 1 : -1));
+  }
 };
