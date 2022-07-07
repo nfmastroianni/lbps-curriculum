@@ -3,11 +3,16 @@ export const createCurriculaObject = (array) => {
     return {
       published: curriculum[0],
       title: curriculum[1],
-      band: curriculum[2],
-      area: curriculum[3],
-      guide: curriculum[4],
-      calendar: curriculum[5],
+      span: curriculum[2],
+      level: curriculum[3],
+      area: curriculum[4],
+      guide: curriculum[5],
+      calendar: curriculum[6],
     };
   });
   return curricula;
+};
+
+export const alphaSortArrayAscending = (array, prop) => {
+  return array.sort((a, b) => (a[prop] > b[prop] ? 1 : -1));
 };
