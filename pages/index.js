@@ -165,5 +165,6 @@ export async function getStaticProps() {
     props: {
       curricula: curricula,
     },
+    revalidate: 10,
   }
 }
