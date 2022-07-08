@@ -3,10 +3,14 @@ import { google } from 'googleapis'
 export async function fetchCurricula() {
   try {
     const target = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+    const privateKey = process.env.PRIVATE_KEY.replace(
+      new RegExp('\\\\n', 'g'),
+      '\n'
+    )
     const client = new google.auth.JWT(
       process.env.CLIENT_EMAIL,
       null,
-      process.env.PRIVATE_KEY,
+      privateKey,
       target
     )
 
