@@ -165,6 +165,6 @@ export async function getStaticProps() {
     props: {
       curricula: curricula,
     },
-    revalidate: 10,
+    revalidate: 60, // netlify doesn't support values lower than 60
   }
 }
