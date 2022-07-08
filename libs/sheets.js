@@ -22,13 +22,13 @@ export async function fetchCurricula() {
     rows.shift()
     if (rows.length) {
       return rows.map((row) => ({
-        published: row[0],
-        title: row[1],
-        span: row[2],
-        level: row[3],
-        area: row[4],
-        guide: row[5],
-        calendar: row[6],
+        published: row[0] || null,
+        title: row[1] || null,
+        span: row[2] || null,
+        level: row[3] || null,
+        area: row[4] || null,
+        guide: row[5] || null,
+        calendar: row[6] || null,
       }))
     }
   } catch (err) {
