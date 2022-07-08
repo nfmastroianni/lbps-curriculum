@@ -27,18 +27,17 @@ const NavWrapper = styled.div`
 
 const ButtonLink = styled.a`
   text-align: center;
-  border: 1px solid var(--dark-green);
   margin-bottom: 0.5rem;
   &:last-child {
     margin-bottom: 0;
   }
   padding: 0.75rem 1.2rem;
-  background-color: var(--light-green);
-  color: var(--dark-gray);
+  background-color: var(--dark-green);
+  color: white;
   border-radius: 3px;
   min-width: 300px;
   &:hover {
-    box-shadow: 0 0 2px 1px var(--dark-green);
+    box-shadow: 0 0 4px 2px var(--light-gray);
   }
 `
 
