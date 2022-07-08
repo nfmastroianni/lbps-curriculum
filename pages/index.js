@@ -85,14 +85,14 @@ export default function Home({ curricula }) {
           </NavWrapper>
         </Section>
         {spans.map((span, i) => {
-          let areas = []
+          let allAreas = []
           curricula.forEach((curriculum) => {
             if (curriculum.span == span && curriculum.published === 'TRUE') {
-              areas.push(curriculum.area)
+              allAreas.push(curriculum.area)
             }
           })
+          const areas = [...new Set(allAreas)]
           alphaSortArrayAscending(areas)
-
           return (
             <Section key={span + i} id={span} headerText={span}>
               {areas.map((area, j) => {
@@ -120,26 +120,40 @@ export default function Home({ curricula }) {
                             </h4>
                             <AccordionPanel pb={4}>
                               <List spacing={3}>
-                                <ListItem>
-                                  <ListIcon as={FaFilePdf} />
-                                  <a
-                                    href={areaCurriculum.guide}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                  >
-                                    Curriculum Guide
-                                  </a>
-                                </ListItem>
-                                <ListItem>
-                                  <ListIcon as={FaRegCalendarAlt} />
-                                  <a
-                                    href={areaCurriculum.calendar}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                  >
-                                    Pacing Calendar
-                                  </a>
-                                </ListItem>
+                                {areaCurriculum.guide && (
+                                  <ListItem>
+                                    <ListIcon as={FaFilePdf} />
+                                    <a
+                                      href={areaCurriculum.guide}
+                                      target='_blank'
+                                      rel='noreferrer'
+                                    >
+                                      Curriculum Guide
+                                    </a>
+                                  </ListItem>
+                                )}
+                                {areaCurriculum.calendar && (
+                                  <ListItem>
+                                    <ListIcon as={FaRegCalendarAlt} />
+                                    <a
+                                      href={areaCurriculum.calendar}
+                                      target='_blank'
+                                      rel='noreferrer'
+                                    >
+                                      Pacing Calendar
+                                    </a>
+                                  </ListItem>
+                                )}
+                                {!areaCurriculum.guide &&
+                                  !areaCurriculum.calendar && (
+                                    <ListItem>
+                                      <p>
+                                        No curriculum documents are available
+                                        for this course at this time. Please
+                                        check back later.
+                                      </p>
+                                    </ListItem>
+                                  )}
                               </List>
                             </AccordionPanel>
                           </AccordionItem>
