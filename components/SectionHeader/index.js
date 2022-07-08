@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 const Header = styled.header`
   background-color: var(--dark-green);
@@ -6,18 +6,21 @@ const Header = styled.header`
   h2 {
     color: white;
     text-align: center;
+    font-size: 1.3rem;
   }
   @media (min-width: 640px) {
+    padding: 0.3rem;
     h2 {
-      font-size: 1.2rem;
+      font-size: 1.7rem;
+      letter-spacing: 0.3rem;
     }
   }
-`;
+`
 
 export default function SectionHeader({ headerText }) {
   return (
     <Header>
       <h2>{headerText}</h2>
     </Header>
-  );
+  )
 }
