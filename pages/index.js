@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react'
 import Section from '../components/Section'
 import { FaFilePdf, FaRegCalendarAlt } from 'react-icons/fa'
-import { fetchCurricula } from '../libs/sheets'
+import { fetchAllCurricula } from '../libs/sheets'
 
 const NavWrapper = styled.div`
   margin: 0 auto;
@@ -107,7 +107,7 @@ export default function Home({ curricula }) {
               velit quisquam sint rerum?
             </Text>
           </GridItem>
-          <GridItem colSpan={{ lg: 2 }} rowspan="1">
+          <GridItem colSpan={{ lg: 2 }} rowSpan="1">
             <Heading
               as="h3"
               fontSize={'2xl'}
@@ -229,7 +229,7 @@ export default function Home({ curricula }) {
 }
 
 export async function getStaticProps() {
-  const curricula = await fetchCurricula()
+  const curricula = await fetchAllCurricula()
 
   return {
     props: {
