@@ -30,6 +30,7 @@ export async function getStaticPaths() {
   uniqueArray.forEach((path) => {
     paths.push({ params: { slug: [path] } })
   })
+  console.log('$$$$$$$$$$$$$$$$$ ', paths[0].params)
   return {
     paths,
     fallback: false,
