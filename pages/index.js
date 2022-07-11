@@ -57,7 +57,7 @@ export default function Home({ curricula }) {
   return (
     <>
       <Head>
-        <title>LBPS Curriculum Warehouse</title>
+        <title>LBPS Curriculum and Instruction</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout>
