@@ -27,13 +27,12 @@ export default function FilteredCurriculaPage({
       <Box maxWidth="xl" margin={'0 auto'}>
         <Heading
           textAlign="center"
-          textTransform="uppercase"
           borderBottom="2px"
           borderColor="brand.300"
           paddingBottom="4"
           marginTop="1.5rem"
         >
-          {`${span} | ${area}`}
+          {`${span} · ${area}`}
         </Heading>
         <Accordion allowToggle>
           {curricula.map((areaCurriculum) => {
