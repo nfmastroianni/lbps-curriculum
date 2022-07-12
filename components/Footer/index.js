@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import Image from "next/image";
+import styled from '@emotion/styled'
+import Image from 'next/image'
 
 const Foot = styled.footer`
   margin-top: auto;
@@ -13,18 +13,18 @@ const Foot = styled.footer`
     font-size: 0.65rem;
     font-style: italic;
   }
-`;
+`
 
 export default function Footer() {
   return (
     <Foot>
       <Image
-        src="/images/curriculum_logo.png"
+        src="/images/lbps_logo.png"
         alt="LBPS Curriculum Seal"
         width={40}
         height={40}
       />
       <p>Together We Can, Juntos Nós Podemos, Juntos Podemos</p>
     </Foot>
-  );
+  )
 }
