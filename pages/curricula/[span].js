@@ -99,5 +99,6 @@ export async function getStaticProps(context) {
     props: {
       areas: uniqueAreas,
     },
+    revalidate: 60,
   }
 }
