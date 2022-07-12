@@ -44,9 +44,7 @@ export default function SpanPage({ areas }) {
             </NextLink>
           </BreadcrumbItem>
           <BreadcrumbItem isCurrentPage>
-            <NextLink href={`/curricula/${span}#`} passHref>
-              <BreadcrumbLink>{span.toUpperCase()}</BreadcrumbLink>
-            </NextLink>
+            <BreadcrumbLink>{span.toUpperCase()}</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>

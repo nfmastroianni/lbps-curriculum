@@ -31,9 +31,7 @@ export default function CurriculaIndex() {
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <NextLink href="#" passHref>
-              <BreadcrumbLink>Curricula</BreadcrumbLink>
-            </NextLink>
+            <BreadcrumbLink>Curricula</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>

@@ -53,9 +53,7 @@ export default function FilteredCurriculaPage({
             </NextLink>
           </BreadcrumbItem>
           <BreadcrumbItem isCurrentPage>
-            <NextLink href={`/curricula/${spanSlug}/${areaSlug}#`} passHref>
-              <BreadcrumbLink>{area}</BreadcrumbLink>
-            </NextLink>
+            <BreadcrumbLink>{area}</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
