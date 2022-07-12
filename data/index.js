@@ -12,19 +12,19 @@ export const mainMenu = [
     id: 3,
   },
   {
-    linkText: 'K-5 Curricula',
+    linkText: '- K-5 Curricula',
     url: '/curricula/k-5',
     type: 'internal',
     id: 4,
   },
   {
-    linkText: '6-8 Curricula',
+    linkText: '- 6-8 Curricula',
     url: '/curricula/6-8',
     type: 'internal',
     id: 5,
   },
   {
-    linkText: '9-12 Curricula',
+    linkText: '- 9-12 Curricula',
     url: '/curricula/9-12',
     type: 'internal',
     id: 6,
