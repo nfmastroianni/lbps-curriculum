@@ -1,5 +1,6 @@
 import Headroom from 'react-headroom'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import Image from 'next/image'
 import { Heading, Show } from '@chakra-ui/react'
 import DrawerNav from './Drawer'
@@ -40,19 +41,24 @@ export default function Navbar(props) {
   return (
     <Headroom>
       <Nav>
+        <DrawerNav />
         <Show above="lg">
-          <Image
-            src="/images/lbps_logo.png"
-            height={50}
-            width={50}
-            alt="Long Branch Public Schools Seal"
-          />
+          <Link href="/">
+            <a>
+              <Image
+                src="/images/lbps_logo.png"
+                height={50}
+                width={50}
+                alt="Long Branch Public Schools Seal"
+              />
+            </a>
+          </Link>
         </Show>
 
-        <DrawerNav />
-
         <Heading as="h1" justifySelf={{ sm: 'center' }}>
-          LBPS Curriculum &amp; Instruction
+          <Link href="/">
+            <a>LBPS Curriculum &amp; Instruction</a>
+          </Link>
         </Heading>
       </Nav>
     </Headroom>
