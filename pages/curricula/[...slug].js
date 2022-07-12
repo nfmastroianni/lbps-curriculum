@@ -15,7 +15,7 @@ import Layout from '../../components/Layout'
 import { fetchAllCurricula, fetchFilteredCurricula } from '../../libs/sheets'
 import { getSpanPaths } from '../../utils'
 
-export default function FilteredCurriculaPage({ curricula, area }) {
+export default function FilteredCurriculaPage({ curricula, area, span }) {
   return (
     <Layout>
       <Box maxWidth="xl" margin={'0 auto'}>
@@ -27,7 +27,7 @@ export default function FilteredCurriculaPage({ curricula, area }) {
           paddingBottom="4"
           marginTop="1.5rem"
         >
-          {area}
+          {`${span} | ${area}`}
         </Heading>
         <Accordion allowToggle>
           {curricula.map((areaCurriculum) => {
@@ -106,6 +106,7 @@ export async function getStaticProps(context) {
     props: {
       curricula,
       area,
+      span,
     },
     revalidate: 60,
   }
