@@ -24,12 +24,16 @@ export default function DrawerNav() {
   return (
     <>
       <Button
+        position={'absolute'}
+        left="4"
         leftIcon={
           <Icon as={HiMenuAlt2} w={{ base: 5, lg: 7 }} h={{ base: 5, lg: 7 }} />
         }
         ref={btnRef}
         onClick={onOpen}
-        colorScheme={'brand'}
+        colorScheme={'white'}
+        color="brand.200"
+        _hover={{ backgroundColor: 'brand.300' }}
       >
         <VisuallyHidden>Menu</VisuallyHidden>
       </Button>

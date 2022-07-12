@@ -21,10 +21,6 @@ body {
   }
 }
 
-.headroom {
-  background-color: var(--dark-green);
-}
-
 a {
   color: inherit;
   text-decoration: none;
