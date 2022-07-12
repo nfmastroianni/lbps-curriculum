@@ -10,6 +10,7 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: end;
   box-shadow: 0 0 6px 3px var(--dark-gray);
+  margin-bottom: 1rem;
   h1 {
     margin: 0;
     color: white;
@@ -39,18 +40,18 @@ export default function Navbar(props) {
   return (
     <Headroom>
       <Nav>
-        <Show above='lg'>
+        <Show above="lg">
           <Image
-            src='/images/lbps_logo.png'
+            src="/images/lbps_logo.png"
             height={50}
             width={50}
-            alt='Long Branch Public Schools Seal'
+            alt="Long Branch Public Schools Seal"
           />
         </Show>
 
         <DrawerNav />
 
-        <Heading as='h1' justifySelf={{ sm: 'center' }}>
+        <Heading as="h1" justifySelf={{ sm: 'center' }}>
           LBPS Curriculum &amp; Instruction
         </Heading>
       </Nav>

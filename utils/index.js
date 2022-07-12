@@ -31,3 +31,19 @@ export const slugify = (text) => {
     .replace(/[^\w\-]+/g, '') // Remove all non-word chars
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
 }
+
+export const getSpanPaths = (curricula) => {
+  const pairs = []
+  curricula.forEach((curriculum) => {
+    let pair = [slugify(curriculum.span), slugify(curriculum.area)]
+    pairs.push(pair)
+  })
+  let stringPairs = pairs.map(JSON.stringify)
+  const uniquePairs = new Set(stringPairs)
+  const uniqueArray = Array.from(uniquePairs, JSON.parse)
+  const paths = []
+  uniqueArray.forEach((path) => {
+    paths.push({ params: { slug: path } })
+  })
+  return paths
+}

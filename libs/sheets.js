@@ -1,4 +1,5 @@
 import { google } from 'googleapis'
+import { slugify } from '../utils'
 
 export async function fetchAllCurricula() {
   try {
@@ -57,14 +58,15 @@ export async function fetchFilteredCurricula(span, area) {
 
     const rows = response.data.values
     rows.shift()
-    if (span && area) {
-      const filteredRows = rows.filter((row) => {
-        return row[2] === span && row[4] === area
-      })
-      console.log(filteredRows)
-    }
-    if (rows.length) {
-      return rows.map((row) => ({
+    const filteredRows = rows.filter(
+      (row) =>
+        row[0] === 'TRUE' &&
+        slugify(row[2]) === span &&
+        slugify(row[4]) === area
+    )
+
+    if (filteredRows.length) {
+      return filteredRows.map((row) => ({
         published: row[0] || null,
         title: row[1] || null,
         span: row[2] || null,

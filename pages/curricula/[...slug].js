@@ -1,16 +1,86 @@
-import { Box, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  Heading,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  List,
+  ListItem,
+  ListIcon,
+} from '@chakra-ui/react'
+import { FaFilePdf, FaRegCalendarAlt } from 'react-icons/fa'
 import Layout from '../../components/Layout'
-import { useRouter } from 'next/router'
-import { fetchAllCurricula } from '../../libs/sheets'
-import { slugify } from '../../utils'
+import { fetchAllCurricula, fetchFilteredCurricula } from '../../libs/sheets'
+import { getSpanPaths } from '../../utils'
 
-export default function FilteredCurriculaPage() {
-  const router = useRouter()
-  console.log(router)
+export default function FilteredCurriculaPage({ curricula, area }) {
   return (
     <Layout>
-      <Box>
-        <Heading>FILTERED CURRICULA PAGE</Heading>
+      <Box maxWidth="xl" margin={'0 auto'}>
+        <Heading
+          textAlign="center"
+          textTransform="uppercase"
+          borderBottom="2px"
+          borderColor="brand.300"
+          paddingBottom="4"
+          marginTop="1.5rem"
+        >
+          {area}
+        </Heading>
+        <Accordion allowToggle>
+          {curricula.map((areaCurriculum) => {
+            return (
+              <AccordionItem key={areaCurriculum.title}>
+                <h4>
+                  <AccordionButton>
+                    <Box flex="1" textAlign="left">
+                      {areaCurriculum.title}
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h4>
+                <AccordionPanel pb={4}>
+                  <List spacing={3}>
+                    {areaCurriculum.guide && (
+                      <ListItem>
+                        <ListIcon as={FaFilePdf} />
+                        <a
+                          href={areaCurriculum.guide}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Curriculum Guide
+                        </a>
+                      </ListItem>
+                    )}
+                    {areaCurriculum.calendar && (
+                      <ListItem>
+                        <ListIcon as={FaRegCalendarAlt} />
+                        <a
+                          href={areaCurriculum.calendar}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Pacing Calendar
+                        </a>
+                      </ListItem>
+                    )}
+                    {!areaCurriculum.guide && !areaCurriculum.calendar && (
+                      <ListItem>
+                        <p>
+                          No curriculum documents are available for this course
+                          at this time. Please check back later.
+                        </p>
+                      </ListItem>
+                    )}
+                  </List>
+                </AccordionPanel>
+              </AccordionItem>
+            )
+          })}
+        </Accordion>
       </Box>
     </Layout>
   )
@@ -18,29 +88,25 @@ export default function FilteredCurriculaPage() {
 
 export async function getStaticPaths() {
   const curricula = await fetchAllCurricula()
-  const pairs = []
-  curricula.forEach((curriculum) => {
-    let pair = [curriculum.span, curriculum.area]
-    pairs.push(pair)
-  })
-  let stringPairs = pairs.map(JSON.stringify)
-  const uniquePairs = [...new Set(stringPairs)]
-  const uniqueArray = Array.from(uniquePairs, JSON.parse)
-  const paths = []
-  uniqueArray.forEach((path) => {
-    paths.push({ params: { slug: [path] } })
-  })
-  console.log('$$$$$$$$$$$$$$$$$ ', paths[0].params)
+  const paths = getSpanPaths(curricula)
+
   return {
     paths,
     fallback: false,
   }
 }
 export async function getStaticProps(context) {
-  console.log(context)
+  const { params } = context
+  const span = params.slug[0]
+  const area = params.slug[1]
+
+  const curricula = await fetchFilteredCurricula(span, area)
+
   return {
     props: {
-      text: 'ooops!',
+      curricula,
+      area,
     },
+    revalidate: 60,
   }
 }

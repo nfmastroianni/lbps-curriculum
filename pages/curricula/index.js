@@ -4,8 +4,17 @@ import Layout from '../../components/Layout'
 export default function CurriculaIndex() {
   return (
     <Layout>
-      <Box>
-        <Heading>CURRICULA INDEX PAGE</Heading>
+      <Box maxW="xl" margin="0 auto">
+        <Heading
+          textAlign="center"
+          textTransform="uppercase"
+          borderBottom="2px"
+          borderColor="brand.300"
+          paddingBottom="4"
+          marginTop="1.5rem"
+        >
+          CURRICULA INDEX PAGE
+        </Heading>
       </Box>
     </Layout>
   )

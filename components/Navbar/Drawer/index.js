@@ -35,7 +35,7 @@ export default function DrawerNav() {
       </Button>
       <Drawer
         isOpen={isOpen}
-        placement='left'
+        placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
       >
@@ -50,14 +50,16 @@ export default function DrawerNav() {
                 return (
                   <ListItem
                     key={id}
-                    borderBottom='1px'
-                    borderColor='brand.300'
-                    paddingBottom='2'
+                    borderBottom="1px"
+                    borderColor="brand.300"
+                    paddingBottom="2"
                   >
                     {type === 'external' ? (
                       <a href={url}>{linkText}</a>
                     ) : (
-                      <Link href={url}>{linkText}</Link>
+                      <Link href={url} passHref>
+                        <a onClick={() => onClose()}>{linkText}</a>
+                      </Link>
                     )}
                   </ListItem>
                 )
@@ -66,7 +68,7 @@ export default function DrawerNav() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button onClick={onClose} colorScheme='brand'>
+            <Button onClick={onClose} colorScheme="brand">
               Close
             </Button>
           </DrawerFooter>

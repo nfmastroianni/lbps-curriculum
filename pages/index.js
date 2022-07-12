@@ -1,64 +1,11 @@
 import Head from 'next/head'
-import Link from 'next/link'
+// import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '../components/Layout'
-import styled from '@emotion/styled'
-import { alphaSortArrayAscending } from '../utils'
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-  List,
-  ListItem,
-  ListIcon,
-  Grid,
-  GridItem,
-  Heading,
-  Text,
-} from '@chakra-ui/react'
+import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import Section from '../components/Section'
-import { FaFilePdf, FaRegCalendarAlt } from 'react-icons/fa'
-import { fetchAllCurricula } from '../libs/sheets'
 
-const NavWrapper = styled.div`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-`
-
-const ButtonLink = styled.a`
-  text-align: center;
-  margin-bottom: 0.5rem;
-  &:last-child {
-    margin-bottom: 0;
-  }
-  padding: 0.75rem 1.2rem;
-  background-color: var(--dark-green);
-  color: white;
-  border-radius: 3px;
-  min-width: 300px;
-  &:hover {
-    box-shadow: 0 0 4px 2px var(--light-gray);
-  }
-`
-
-export default function Home({ curricula }) {
-  if (!curricula) {
-    return (
-      <>
-        <h1>No Connection to Database</h1>
-      </>
-    )
-  }
-  const allSpans = []
-  curricula.forEach((curriculum) => {
-    curriculum.published === 'TRUE' && allSpans.push(curriculum.span)
-  })
-  const spans = [...new Set(allSpans)]
+export default function Home() {
   return (
     <>
       <Head>
@@ -68,6 +15,8 @@ export default function Home({ curricula }) {
       <Layout>
         <Grid
           minH="250px"
+          maxW="2560px"
+          margin="0 auto"
           templateRows={{ lg: 'repeat(3, 1fr)' }}
           templateColumns={{ lg: 'repeat(5, 1fr)' }}
           justifyItems="center"
@@ -84,6 +33,7 @@ export default function Home({ curricula }) {
               alt="LBPS Seal"
               width={300}
               height={300}
+              priority
             />
           </GridItem>
           <GridItem colSpan={{ lg: 3 }} rowSpan="1" alignSelf="end">
@@ -107,7 +57,7 @@ export default function Home({ curricula }) {
               velit quisquam sint rerum?
             </Text>
           </GridItem>
-          <GridItem colSpan={{ lg: 2 }} rowSpan="1">
+          <GridItem colSpan={{ lg: 2 }} rowSpan="1" alignSelf="end">
             <Heading
               as="h3"
               fontSize={'2xl'}
@@ -123,15 +73,20 @@ export default function Home({ curricula }) {
             </Heading>
           </GridItem>
           <GridItem colSpan={{ lg: 3 }} rowSpan="1">
+            <Heading
+              as="h4"
+              marginBottom="4"
+              fontSize={['lg', 'xl', '2xl']}
+              textAlign="center"
+            >
+              Office Information
+            </Heading>
+            <address style={{ textAlign: 'center' }}>
+              540 Broadway <br />
+              Long Branch, NJ 07740
+            </address>
+            <br />
             <Text textAlign="center" fontSize={['md', 'lg', 'xl']}>
-              <Heading as="h4" fontSize="xl" marginBottom="4">
-                Office Information
-              </Heading>
-              <address>
-                540 Broadway <br />
-                Long Branch, NJ 07740
-              </address>
-              <br />
               <span style={{ fontWeight: 600 }}>Maria Graziano</span>
               <br />
               Confidential Secretary
@@ -140,101 +95,8 @@ export default function Home({ curricula }) {
             </Text>
           </GridItem>
         </Grid>
-
-        {spans.map((span, i) => {
-          let allAreas = []
-          curricula.forEach((curriculum) => {
-            if (curriculum.span == span && curriculum.published === 'TRUE') {
-              allAreas.push(curriculum.area)
-            }
-          })
-          const areas = [...new Set(allAreas)]
-          alphaSortArrayAscending(areas)
-          return (
-            <Section key={span + i} id={span} headerText={span}>
-              {areas.map((area, j) => {
-                let areaCurricula = curricula.filter(
-                  (curriculum) =>
-                    curriculum.span === span &&
-                    curriculum.area === area &&
-                    curriculum.published === 'TRUE'
-                )
-                alphaSortArrayAscending(areaCurricula, 'title')
-                return (
-                  <div key={span + i + area + j}>
-                    <h3>{area}</h3>
-                    <Accordion allowToggle>
-                      {areaCurricula.map((areaCurriculum) => {
-                        return (
-                          <AccordionItem key={areaCurriculum.title}>
-                            <h4>
-                              <AccordionButton>
-                                <Box flex="1" textAlign="left">
-                                  {areaCurriculum.title}
-                                </Box>
-                                <AccordionIcon />
-                              </AccordionButton>
-                            </h4>
-                            <AccordionPanel pb={4}>
-                              <List spacing={3}>
-                                {areaCurriculum.guide && (
-                                  <ListItem>
-                                    <ListIcon as={FaFilePdf} />
-                                    <a
-                                      href={areaCurriculum.guide}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      Curriculum Guide
-                                    </a>
-                                  </ListItem>
-                                )}
-                                {areaCurriculum.calendar && (
-                                  <ListItem>
-                                    <ListIcon as={FaRegCalendarAlt} />
-                                    <a
-                                      href={areaCurriculum.calendar}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      Pacing Calendar
-                                    </a>
-                                  </ListItem>
-                                )}
-                                {!areaCurriculum.guide &&
-                                  !areaCurriculum.calendar && (
-                                    <ListItem>
-                                      <p>
-                                        No curriculum documents are available
-                                        for this course at this time. Please
-                                        check back later.
-                                      </p>
-                                    </ListItem>
-                                  )}
-                              </List>
-                            </AccordionPanel>
-                          </AccordionItem>
-                        )
-                      })}
-                    </Accordion>
-                  </div>
-                )
-              })}
-            </Section>
-          )
-        })}
+        <Section headerText="Department Overview"></Section>
       </Layout>
     </>
   )
-}
-
-export async function getStaticProps() {
-  const curricula = await fetchAllCurricula()
-
-  return {
-    props: {
-      curricula: curricula,
-    },
-    revalidate: 60, // netlify doesn't support values lower than 60
-  }
 }

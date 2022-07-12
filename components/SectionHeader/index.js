@@ -12,7 +12,7 @@ const Header = styled.header`
     padding: 0.3rem;
     h2 {
       font-size: 1.7rem;
-      letter-spacing: 0.3rem;
+      letter-spacing: 0.05rem;
     }
   }
 `
