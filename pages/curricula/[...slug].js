@@ -1,5 +1,8 @@
 import {
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Heading,
   Accordion,
   AccordionItem,
@@ -10,10 +13,12 @@ import {
   ListItem,
   ListIcon,
 } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { FaFilePdf, FaRegCalendarAlt } from 'react-icons/fa'
 import Layout from '../../components/Layout'
 import { fetchAllCurricula, fetchFilteredCurricula } from '../../libs/sheets'
 import { getSpanPaths } from '../../utils'
+import { HiChevronRight } from 'react-icons/hi'
 
 export default function FilteredCurriculaPage({
   curricula,
@@ -24,6 +29,36 @@ export default function FilteredCurriculaPage({
 }) {
   return (
     <Layout>
+      <Box
+        textAlign="center"
+        margin={'1.5rem 3rem'}
+        paddingTop="1.5rem"
+        fontSize={['xs', 'sm', 'md', 'lg', 'xl']}
+      >
+        <Breadcrumb separator={<HiChevronRight />}>
+          <BreadcrumbItem>
+            <NextLink href="/" passHref>
+              <BreadcrumbLink>Home</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <NextLink href="/curricula" passHref>
+              <BreadcrumbLink>Curricula</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <NextLink href={`/curricula/${spanSlug}`} passHref>
+              <BreadcrumbLink>{span}</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem isCurrentPage>
+            <NextLink href={`/curricula/${spanSlug}/${areaSlug}#`} passHref>
+              <BreadcrumbLink>{area}</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </Box>
       <Box maxWidth="xl" margin={'0 auto'}>
         <Heading
           textAlign="center"

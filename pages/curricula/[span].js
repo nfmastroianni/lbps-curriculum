@@ -1,6 +1,8 @@
 import {
   Box,
-  Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Heading,
   Link,
   List,
@@ -14,6 +16,7 @@ import NextLink from 'next/link'
 import { fetchAllCurricula, fetchFilteredCurricula } from '../../libs/sheets'
 import { slugify } from '../../utils'
 import Section from '../../components/Section'
+import { HiChevronRight } from 'react-icons/hi'
 
 export default function SpanPage({ areas }) {
   const {
@@ -22,6 +25,31 @@ export default function SpanPage({ areas }) {
 
   return (
     <Layout>
+      <Box
+        textAlign="center"
+        margin={'1.5rem 3rem'}
+        paddingTop="1.5rem"
+        fontSize={['xs', 'sm', 'md', 'lg', 'xl']}
+      >
+        <Breadcrumb separator={<HiChevronRight />}>
+          <BreadcrumbItem>
+            <NextLink href="/" passHref>
+              <BreadcrumbLink>Home</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <NextLink href="/curricula" passHref>
+              <BreadcrumbLink>Curricula</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+          <BreadcrumbItem isCurrentPage>
+            <NextLink href={`/curricula/${span}#`} passHref>
+              <BreadcrumbLink>{span.toUpperCase()}</BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </Box>
       <Box margin="0 auto" maxW="3xl">
         <Heading
           textAlign="center"
