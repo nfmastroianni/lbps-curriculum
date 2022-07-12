@@ -15,7 +15,13 @@ import Layout from '../../components/Layout'
 import { fetchAllCurricula, fetchFilteredCurricula } from '../../libs/sheets'
 import { getSpanPaths } from '../../utils'
 
-export default function FilteredCurriculaPage({ curricula, area, span }) {
+export default function FilteredCurriculaPage({
+  curricula,
+  area,
+  span,
+  areaSlug,
+  spanSlug,
+}) {
   return (
     <Layout>
       <Box maxWidth="xl" margin={'0 auto'}>
@@ -97,16 +103,19 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps(context) {
   const { params } = context
-  const span = params.slug[0]
-  const area = params.slug[1]
+  const spanSlug = params.slug[0]
+  const areaSlug = params.slug[1]
 
-  const curricula = await fetchFilteredCurricula(span, area)
-
+  const curricula = await fetchFilteredCurricula(spanSlug, areaSlug)
+  const area = curricula[0].area
+  const span = curricula[0].span
   return {
     props: {
       curricula,
       area,
       span,
+      areaSlug,
+      spanSlug,
     },
     revalidate: 60,
   }
