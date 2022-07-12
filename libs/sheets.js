@@ -1,5 +1,5 @@
 import { google } from 'googleapis'
-import { slugify } from '../utils'
+import { createCurriculaObject, slugify } from '../utils'
 
 export async function fetchAllCurricula() {
   try {
@@ -58,23 +58,23 @@ export async function fetchFilteredCurricula(span, area) {
 
     const rows = response.data.values
     rows.shift()
-    const filteredRows = rows.filter(
-      (row) =>
-        row[0] === 'TRUE' &&
-        slugify(row[2]) === span &&
-        slugify(row[4]) === area
-    )
-
-    if (filteredRows.length) {
-      return filteredRows.map((row) => ({
-        published: row[0] || null,
-        title: row[1] || null,
-        span: row[2] || null,
-        level: row[3] || null,
-        area: row[4] || null,
-        guide: row[5] || null,
-        calendar: row[6] || null,
-      }))
+    if (span && area) {
+      let filteredRows = rows.filter(
+        (row) =>
+          row[0] === 'TRUE' &&
+          slugify(row[2]) === span &&
+          slugify(row[4]) === area
+      )
+      if (filteredRows.length) {
+        return createCurriculaObject(filteredRows)
+      }
+    } else if (!area) {
+      let filteredRows = rows.filter(
+        (row) => row[0] === 'TRUE' && slugify(row[2]) === span
+      )
+      if (filteredRows.length) {
+        return createCurriculaObject(filteredRows)
+      }
     }
   } catch (err) {
     console.log(err)
