@@ -69,7 +69,7 @@ export default function CurriculaIndex() {
               border={'1px'}
               borderColor={'brand.300'}
               borderRadius="3px"
-              padding="1rem"
+              padding="1rem 2rem"
               marginBottom={4}
             >
               <NextLink href="/curricula/k-5" passHref>
@@ -100,7 +100,7 @@ export default function CurriculaIndex() {
               border={'1px'}
               borderColor={'brand.300'}
               borderRadius="3px"
-              padding="1rem"
+              padding="1rem 2rem"
               marginTop={4}
             >
               <NextLink href="/curricula/6-8" passHref>
@@ -143,7 +143,7 @@ export default function CurriculaIndex() {
               border={'1px'}
               borderColor={'brand.300'}
               borderRadius="3px"
-              padding="1rem"
+              padding="1rem 2rem"
               marginBottom={4}
             >
               <NextLink href="/curricula/9-12" passHref>
