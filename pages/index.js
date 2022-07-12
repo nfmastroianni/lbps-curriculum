@@ -2,7 +2,7 @@ import Head from 'next/head'
 // import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '../components/Layout'
-import { Grid, GridItem, Heading, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import Section from '../components/Section'
 
 export default function Home() {
@@ -95,7 +95,32 @@ export default function Home() {
             </Text>
           </GridItem>
         </Grid>
-        <Section headerText="Department Overview"></Section>
+        <Section headerText="Department Overview">
+          <Box maxW="6xl" margin="0 auto">
+            <Text fontSize={['lg', 'xl', '2xl']}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+              alias dolore placeat, eius dolor laborum autem doloribus rerum
+              possimus aperiam esse minus modi cupiditate reiciendis voluptatum
+              laudantium at numquam accusantium.
+            </Text>
+          </Box>
+        </Section>
+        <Section headerText="Another Section...">
+          <Box maxW="6xl" margin="0 auto">
+            <Text fontSize={['lg', 'xl', '2xl']}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+              alias dolore placeat, eius dolor laborum autem doloribus rerum
+              possimus aperiam esse minus modi cupiditate reiciendis voluptatum
+              laudantium at numquam accusantium.
+            </Text>
+            <Text fontSize={['lg', 'xl', '2xl']}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+              alias dolore placeat, eius dolor laborum autem doloribus rerum
+              possimus aperiam esse minus modi cupiditate reiciendis voluptatum
+              laudantium at numquam accusantium.
+            </Text>
+          </Box>
+        </Section>
       </Layout>
     </>
   )
