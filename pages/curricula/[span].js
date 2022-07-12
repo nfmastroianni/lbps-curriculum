@@ -34,8 +34,8 @@ export default function SpanPage({ areas }) {
           {span}
         </Heading>
         <Text padding={[2, 4, 6, 8]} fontSize={['md', 'lg', 'xl', '2xl']}>
-          You have reached the curriculum page for {span.toUpperCase()}. Please
-          select a subject area below to access the documents.
+          You have reached the curriculum page for grades {span.toUpperCase()}.
+          Please select a subject area below to access the documents.
         </Text>
       </Box>
       <Section headerText={'Subject Areas'}>
