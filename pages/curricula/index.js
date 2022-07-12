@@ -29,7 +29,6 @@ export default function CurriculaIndex() {
               <BreadcrumbLink>Home</BreadcrumbLink>
             </NextLink>
           </BreadcrumbItem>
-
           <BreadcrumbItem isCurrentPage>
             <BreadcrumbLink>Curricula</BreadcrumbLink>
           </BreadcrumbItem>
@@ -85,7 +84,7 @@ export default function CurriculaIndex() {
                     fontWeight="bold"
                     color="brand.200"
                   >
-                    Select a Subject
+                    K-5 Subjects
                   </Text>
                 </Link>
               </NextLink>
@@ -116,7 +115,7 @@ export default function CurriculaIndex() {
                     fontWeight="bold"
                     color="brand.200"
                   >
-                    Select a Subject
+                    6-8 Subjects
                   </Text>
                 </Link>
               </NextLink>
@@ -134,10 +133,10 @@ export default function CurriculaIndex() {
         <Box margin="0 auto" maxW={'1280px'}>
           <SimpleGrid columns={{ base: 1, md: 2 }} placeItems="center">
             <Text padding={[2, 4, 6, 8]} fontSize={['md', 'lg', 'xl', '2xl']}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel rem
-              magni pariatur assumenda eveniet accusamus, delectus dolor
-              adipisci officiis laudantium dolore inventore facere, sapiente
-              eaque dolorem corporis tempore suscipit impedit!
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis
+              dolorem eligendi adipisci optio accusamus necessitatibus, vitae,
+              sapiente, temporibus unde iure deleniti! Molestiae nostrum
+              officiis aspernatur assumenda cum minus voluptatum expedita.
             </Text>
             <Box
               textAlign={'center'}
@@ -159,7 +158,7 @@ export default function CurriculaIndex() {
                     fontWeight="bold"
                     color="brand.200"
                   >
-                    Select a Subject
+                    9-12 Subjects
                   </Text>
                 </Link>
               </NextLink>
