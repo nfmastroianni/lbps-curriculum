@@ -1,13 +1,13 @@
 export const createCurriculaObject = (array) => {
-  const curricula = array.map((curriculum) => {
+  const curricula = array.map((row) => {
     return {
-      published: curriculum[0],
-      title: curriculum[1],
-      span: curriculum[2],
-      level: curriculum[3],
-      area: curriculum[4],
-      guide: curriculum[5],
-      calendar: curriculum[6],
+      published: row[0] || null,
+      title: row[1] || null,
+      span: row[2] || null,
+      level: row[3] || null,
+      area: row[4] || null,
+      guide: row[5] || null,
+      calendar: row[6] || null,
     }
   })
   return curricula
