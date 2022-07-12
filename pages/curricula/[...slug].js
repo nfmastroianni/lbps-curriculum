@@ -40,7 +40,11 @@ export default function FilteredCurriculaPage({
               <AccordionItem key={areaCurriculum.title}>
                 <h4>
                   <AccordionButton>
-                    <Box flex="1" textAlign="left">
+                    <Box
+                      flex="1"
+                      textAlign="left"
+                      fontSize={['sm', 'md', 'lg', 'xl']}
+                    >
                       {areaCurriculum.title}
                     </Box>
                     <AccordionIcon />
