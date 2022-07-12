@@ -36,7 +36,7 @@ export const getSpanPaths = (curricula) => {
   const pairs = []
   curricula.forEach((curriculum) => {
     let pair = [slugify(curriculum.span), slugify(curriculum.area)]
-    pairs.push(pair)
+    curriculum.published === 'TRUE' && pairs.push(pair)
   })
   let stringPairs = pairs.map(JSON.stringify)
   const uniquePairs = new Set(stringPairs)
