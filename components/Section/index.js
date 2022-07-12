@@ -9,7 +9,6 @@ const SectionElement = styled.section`
   }
 `
 const SectionContent = styled.div`
-  max-width: 768px;
   margin: 0 auto;
   padding: 0.5rem 1rem;
   h2 {
