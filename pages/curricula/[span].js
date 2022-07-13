@@ -66,7 +66,12 @@ export default function SpanPage({ areas }) {
       </Box>
       <Section headerText={'Subject Areas'}>
         <List margin={'1.5rem auto'}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+          <SimpleGrid
+            columns={{ base: 1, md: 2 }}
+            spacing={8}
+            maxW="3xl"
+            margin={'0 auto'}
+          >
             {areas.map((area) => {
               const slug = slugify(area)
               return (
