@@ -16,7 +16,7 @@ export async function fetchAllCurricula() {
     const gsapi = google.sheets({ version: 'v4', auth: client })
     const response = await gsapi.spreadsheets.values.get({
       spreadsheetId: '1u-p159g3E8lue4fznYOnEmjUDWYV2b9Li92GbRljJVQ',
-      range: 'Sheet1',
+      range: 'Curricula',
     })
 
     const rows = response.data.values
@@ -53,7 +53,7 @@ export async function fetchFilteredCurricula(span, area) {
     const gsapi = google.sheets({ version: 'v4', auth: client })
     const response = await gsapi.spreadsheets.values.get({
       spreadsheetId: '1u-p159g3E8lue4fznYOnEmjUDWYV2b9Li92GbRljJVQ',
-      range: 'Sheet1',
+      range: 'Curricula',
     })
 
     const rows = response.data.values
